@@ -21,6 +21,38 @@ Rx.Observable.from([1,2,3,4,5,6,7,8,9,10]).subscribe(
   }
 );
 
+console.log('----------Array Stream :  Visual Example-------------');
+
+const foodItems =[
+  { id:1 , name:'Biryani' },
+  { id:2 , name:'Chicken Burger' },
+  { id:3 , name:'Sandwich' }
+];
+
+var foodItemsList = document.getElementById('foodItems');
+
+const foodItems$ = Rx.Observable.from(foodItems);
+
+let totalCount = 0;
+
+foodItems$.subscribe(
+  function (data) {
+    let li = document.createElement('li');
+    li.appendChild(document.createTextNode(data.name));
+    foodItemsList.appendChild(li);
+    totalCount++;
+  },
+  function (error) {
+    console.log('error:',error);
+  },
+  function () {
+    let li = document.createElement('li');
+    li.appendChild(document.createTextNode('Total Count:' + totalCount));
+    foodItemsList.appendChild(li);
+  }
+)
+
+
 
 // Data stream from a "Arrays Like Objects"
 console.log('----------Stream from Array Like Objects (like function arguments-------------');
